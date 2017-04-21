@@ -1,15 +1,18 @@
 // Simple API for creating a "hello world" JSON response.
 
+import Foundation
 import Kitura
 
 let router = Router()
 
-router.post("/") {
+router.get("/HelloWorld") {
 	request, response, next in
-	response.send("Hello World")
+	response.send("Hello Kitura World")
 	next()
 }
 
-Kitura.addHTTPServer(onPort: 8090, with: router)
+let port = Int(ProcessInfo.processInfo.environment["PORT"] ?? "8090") ?? 8090
+
+Kitura.addHTTPServer(onPort: port, with: router)
 
 Kitura.run()
